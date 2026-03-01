@@ -4,11 +4,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Install Warp-Reg
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install and Run Warp-Reg
         run: |
-          curl -LO https://github.com/ViRb3/wg-cf-v2/releases/download/v1.1.0/wg-cf-v2_linux_amd64
-          chmod +x wg-cf-v2_linux_amd64
-          ./wg-cf-v2_linux_amd64 --register
+          curl -sSL https://github.com/ViRb3/wg-cf-v2/releases/latest/download/wg-cf-v2_linux_amd64 -o wg-cf-v2
+          chmod +x wg-cf-v2
+          ./wg-cf-v2 --register
       - name: Upload Config
         uses: actions/upload-artifact@v4
         with:
