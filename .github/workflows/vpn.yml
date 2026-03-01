@@ -1,0 +1,14 @@
+name: Generate VPN Config
+on: [workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate Config
+        run: |
+          echo "VPN_CONFIG_DATA" > wg-config.conf
+      - name: Upload Config
+        uses: actions/upload-artifact@v4
+        with:
+          name: vpn-config
+          path: wg-config.conf
