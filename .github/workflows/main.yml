@@ -1,0 +1,16 @@
+name: Generate VPN Config
+on: [workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Warp-Reg
+        run: |
+          curl -LO https://github.com/ViRb3/wg-cf-v2/releases/download/v1.1.0/wg-cf-v2_linux_amd64
+          chmod +x wg-cf-v2_linux_amd64
+          ./wg-cf-v2_linux_amd64 --register
+      - name: Upload Config
+        uses: actions/upload-artifact@v4
+        with:
+          name: vpn-config
+          path: wg-config.conf
